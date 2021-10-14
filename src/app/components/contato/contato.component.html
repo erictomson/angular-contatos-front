@@ -1,0 +1,10 @@
+<section>
+    <h3>{{registro.nome}}</h3>
+    <h4>{{registro.email}}</h4>
+    <ul>
+        <li *ngFor="let tel of registro.telefones">
+            <a href="tel:{{tel}}">{{tel}}</a>
+        </li>
+    </ul>
+    <a href="#">Editar</a>
+</section>

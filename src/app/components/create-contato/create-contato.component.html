@@ -1,0 +1,33 @@
+<div id="modal">
+    <form>
+        <label>
+            Nome:
+            <input type="text" name="nome" id="nome" [(ngModel)]="novoContato.nome">
+        </label>
+        <label>
+            E-mail:
+            <input type="email" name="email" id="email" [(ngModel)]="novoContato.email">
+        </label>
+        <label>
+            Telefone:
+            <div *ngFor="let tel of novoContato.telefones; let i = index; trackBy: track;">
+
+                <input type="tel" name="telefone_{{i}}" [(ngModel)]="novoContato.telefones[i]">
+                
+                <a *ngIf="i==0" (click)="addTelefone()">
+                    <i class="material-icons">add_circle</i>
+                </a>
+
+                <a *ngIf="i!=0" (click)="removeTelefone(i)" class="remove">
+                    <i class="material-icons">remove_circle</i>
+                </a>
+                
+            </div>
+            
+        </label>
+        <div class="controles">
+            <button (click)="cancelar()" type="button" class="link">Cancelar</button>
+            <button (click)="salvar()" type="button">Adicionar</button>
+        </div>
+    </form>
+</div>
