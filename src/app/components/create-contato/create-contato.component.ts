@@ -17,9 +17,8 @@ export class CreateContatoComponent implements OnInit {
     telefones:[""]
   }
 
-  cs:ContatoService = new ContatoService();
-
-  constructor() { }
+  // Injetando o serviço no construtor
+  constructor(private cs:ContatoService) { }
 
   cancelar(){
     console.log("Pediu para candelar");

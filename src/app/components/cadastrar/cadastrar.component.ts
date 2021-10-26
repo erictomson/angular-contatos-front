@@ -19,9 +19,11 @@ export class CadastrarComponent implements OnInit {
   senha = '';
   confirmacao = '';
 
-  // Injetando o serviço Auth no componente Cadastrar
+  
   constructor(
+    // Injetando o serviço Auth no componente Cadastrar
     private servico:AuthService,
+    // Injetando o Router
     private router:Router
     ) { }
 
@@ -29,13 +31,23 @@ export class CadastrarComponent implements OnInit {
   }
 
   cadastrar() {
+    // Chamada do método cadastrar() de auth.service
+    // passando os dados do usuário
+    // Observável só disparará a requisição quando o Observador for subscrito
     let observable = this.servico.cadastrar(this.nome, this.email, this.senha);
+    // Descrever o Observável
+    // Observador: objeto com 3 funções que podem ser executadas de acordo com o Observável
+    // Se o Observável retornar um dado, será executado next
+    // Se o Observável retornar um erro, será executado erro
+    // Se o Observável não retornar mais nenhuma informação, será executado complete
     observable.subscribe(
         {
           next: data => {
             //Salvar o token no sessionStorage
             window.sessionStorage.setItem("token", (<response>data).token);
-            // Direcionar o usuário para a home
+            // Direcionar o usuário para a rota /home
+            this.router.navigateByUrl("/home");
+            // Imprimir no console as informações que chegarem no servidor
             console.log(data)
           },
           error: err => console.log(err),
